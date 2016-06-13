@@ -118,18 +118,18 @@ module Instagram
 
     # Returns most recent media items from the currently authorized user's feed
     #
-    # @overload user_media_feed(options={})
+    # @overload user_media_recent(options={})
     #   @param options [Hash] A customizable set of options.
     #   @option options [Integer] :max_id Returns results with an ID less than (that is, older than) or equal to the specified ID.
     #   @option options [Integer] :min_id Return media later than this min_id
     #   @option options [Integer] :count Specifies the number of records to retrieve, per page.
     #   @return [Hashie::Mash]
-    #   @example Return most recent media images that would appear on @shayne's feed
+    #   @example Return most recent media that would appear on @shayne's feed
     #     Instagram.user_media_feed() # assuming @shayne is the authorized user
     # @format :json
     # @authenticated true
     # @rate_limited true
-    # @see http://instagram.com/developer/endpoints/users/#get_users_feed
+    # @see http://instagram.com/developer/endpoints/users/#get_users_media_recent
     def user_media_recent(*args)
       options = args.first.is_a?(Hash) ? args.pop : {}
       response = get('users/self/media/recent', options)

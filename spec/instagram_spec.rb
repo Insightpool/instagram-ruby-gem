@@ -8,17 +8,17 @@ describe Instagram do
   context "when delegating to a client" do
 
      before do
-       stub_get("users/self/feed.json").
-         to_return(:body => fixture("user_media_feed.json"), :headers => {:content_type => "application/json; charset=utf-8"})
+       stub_get("users/self/media/recent.json").
+         to_return(:body => fixture("user_media_recent.json"), :headers => {:content_type => "application/json; charset=utf-8"})
      end
 
      it "should get the correct resource" do
-       Instagram.user_media_feed()
-       a_get("users/self/feed.json").should have_been_made
+       Instagram.user_media_recent()
+       a_get("users/self/media_recent.json").should have_been_made
      end
 
      it "should return the same results as a client" do
-       Instagram.user_media_feed().should == Instagram::Client.new.user_media_feed()
+       Instagram.user_media_recent().should == Instagram::Client.new.user_media_recent()
      end
 
    end

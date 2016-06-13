@@ -10,9 +10,9 @@ describe Instagram::Client do
 
       describe '.utils_raw_response' do
         before do
-          stub_get("users/self/feed.#{format}").
+          stub_get("users/self/media/recent.#{format}").
               with(:query => {:access_token => @client.access_token}).
-              to_return(:body => fixture("user_media_feed.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+              to_return(:body => fixture("user_media_recent.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
 
         before(:each) do

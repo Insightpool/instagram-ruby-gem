@@ -154,24 +154,24 @@ describe Instagram::Client do
         end
       end
 
-      describe ".user_media_feed" do
+      describe ".user_media_recent" do
 
         before do
-          stub_get("users/self/feed.#{format}").
+          stub_get("users/self/media/recent.#{format}").
             with(:query => {:access_token => @client.access_token}).
-            to_return(:body => fixture("user_media_feed.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
+            to_return(:body => fixture("user_media_recent.#{format}"), :headers => {:content_type => "application/#{format}; charset=utf-8"})
         end
 
         it "should get the correct resource" do
-          @client.user_media_feed
-          a_get("users/self/feed.#{format}").
+          @client.user_media_recent
+          stub_get("users/self/media/recent.#{format}").
             with(:query => {:access_token => @client.access_token}).
             should have_been_made
         end
 
         context Instagram::Response do
-          let(:user_media_feed_response){ @client.user_media_feed }
-          subject{ user_media_feed_response }
+          let(:user_media_recent_response){ @client.user_media_recent }
+          subject{ user_media_recent_response }
 
           it{ should be_an_instance_of(Array) }
           it{ should be_a_kind_of(Instagram::Response) }
@@ -179,14 +179,14 @@ describe Instagram::Client do
           it{ should respond_to(:meta) }
 
           context '.pagination' do
-            subject{ user_media_feed_response.pagination }
+            subject{ user_media_recent_response.pagination }
 
             it{ should be_an_instance_of(Hashie::Mash) }
             its(:next_max_id){ should == '22063131' }
           end
 
           context '.meta' do
-            subject{ user_media_feed_response.meta }
+            subject{ user_media_recent_response.meta }
 
             it{ should be_an_instance_of(Hashie::Mash) }
             its(:code){ should == 200 }
@@ -195,7 +195,7 @@ describe Instagram::Client do
       end
 
       describe ".user_liked_media" do
-        
+
         before do
           stub_get("users/self/media/liked.#{format}").
             with(:query => {:access_token => @client.access_token}).
