@@ -130,9 +130,9 @@ module Instagram
     # @authenticated true
     # @rate_limited true
     # @see http://instagram.com/developer/endpoints/users/#get_users_feed
-    def user_media_feed(*args)
+    def user_media_recent(*args)
       options = args.first.is_a?(Hash) ? args.pop : {}
-      response = get('users/self/feed', options)
+      response = get('users/self/media/recent', options)
       response
     end
 
